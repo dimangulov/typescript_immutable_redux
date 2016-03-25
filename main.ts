@@ -70,6 +70,12 @@ describe("Todo", () => {
        var todo = new Todo({title: "XXX"});
         expect(todo.title).to.be.equal("XXX");
     });
+
+    it("todo is immutable", () => {
+        var todo = new Todo({title: "XXX"});
+        expect(() => todo.title = "XXX1").to
+            .throw();
+    });
 });
 
 describe("add todo reducer 2", () => {
