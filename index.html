@@ -13,15 +13,22 @@
 <div id="messages"></div>
 <div id="fixtures"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.4.5/mocha.js"></script>
+<script src=""></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.3.1/redux.js"></script>
 <script src="node_modules/systemjs/dist/system.src.js"></script>
+<script src="node_modules/mocha/mocha.js"></script>
 <script>
     System.config({
+        meta: {
+            /*"mocha": {
+                format: "global"
+            }*/
+        },
         map : {
-            "immutable":"https://cdnjs.cloudflare.com/ajax/libs/immutable/3.7.3/immutable.min.js",
-            "chai" : "https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js",
+            "immutable":"node_modules/immutable/dist/immutable.js",
+            "chai" : "node_modules/chai/chai.js",
             "chai-immutable": "node_modules/chai-immutable/chai-immutable.js",
+            //"mocha": "node_modules/mocha/mocha.js",
         },
         packages: {
             app: {
@@ -30,7 +37,7 @@
             }
         }
     });
-    System.import('main.js')
+    System.import('app/main.js')
             .then(null, console.error.bind(console));
 </script>
 </body>

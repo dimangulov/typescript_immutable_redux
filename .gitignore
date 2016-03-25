@@ -1,2 +1,5 @@
 node_modules/
 .idea/
+app/main.js
+app/main.js.map
+.typingsrc

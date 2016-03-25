@@ -1,75 +1,31 @@
-/// <reference path="./typings/mocha.d.ts" />
-/// <reference path="./typings/chai.d.ts" />
-/// <reference path="./typings/immutable.d.ts" />
+///<reference path="../typings/main.d.ts"/>
+
+import {ITodo, Todo} from "./todo";
+import {addTodoReducer, addTodo, IAddTodoData} from "./actions";
+import {Actions} from "./constants";
 
 import chai = require('chai');
 import Immutable = require('immutable');
-import chaiImmutable = require('chai-immutable');
+import chaiImmutable from 'chai-immutable';
 
 chai.use(chaiImmutable);
 
 const expect = chai.expect;
+
 import List = Immutable.List;
 import Map = Immutable.Map;
 import Record = Immutable.Record;
 
-mocha.setup('bdd');
-
-const Actions = {
-    NULL: "NULL",
-    ADD_TODO: "ADD_TODO"
-};
-
-interface ITodo {
-    title: string;
-}
-
-const defaultTodo:ITodo = {
-    title: ""
-};
-
-class Todo extends Record(defaultTodo) implements ITodo {
-    title:string;
-
-    constructor(props:ITodo) {
-        super(props);
-    }
-}
-
-interface IAction{
-    type:string;
-}
-
-interface IAddTodoData extends IAction{
-    title:string;
-}
+mocha.setup("bdd");
 
 const emptyTodoList = Immutable.List<ITodo>([]);
-
-const addTodoReducer = (state:List<ITodo> = emptyTodoList, action:IAddTodoData):List<ITodo> => {
-    switch (action.type){
-        case Actions.ADD_TODO: {
-            return state.push(new Todo({title: action.title}));
-        }
-        default:{
-            return state;
-        }
-    }
-};
-
-const addTodo = (title:string):IAddTodoData => {
-  return {
-      title: title,
-      type: Actions.ADD_TODO
-  };
-};
 
 //tests
 describe("Todo", () => {
     it("test todo", () => {
        var todo = new Todo({title: "XXX"});
         expect(todo.title).to.be.equal("XXX");
-    });
+    }); 
 
     it("todo is immutable", () => {
         var todo = new Todo({title: "XXX"});
