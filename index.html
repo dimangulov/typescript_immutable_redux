@@ -4,6 +4,7 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
     <title>JS Bin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.4.5/mocha.css"/>
 </head>
@@ -12,10 +13,25 @@
 <div id="messages"></div>
 <div id="fixtures"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.7.3/immutable.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.4.5/mocha.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.3.1/redux.js"></script>
-<script src="main.js"></script>
+<script src="node_modules/systemjs/dist/system.src.js"></script>
+<script>
+    System.config({
+        map : {
+            "immutable":"https://cdnjs.cloudflare.com/ajax/libs/immutable/3.7.3/immutable.min.js",
+            "chai" : "https://cdnjs.cloudflare.com/ajax/libs/chai/3.5.0/chai.js",
+            "chai-immutable": "node_modules/chai-immutable/chai-immutable.js",
+        },
+        packages: {
+            app: {
+                format: 'register',
+                defaultExtension: 'js'
+            }
+        }
+    });
+    System.import('main.js')
+            .then(null, console.error.bind(console));
+</script>
 </body>
 </html>
