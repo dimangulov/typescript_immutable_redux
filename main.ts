@@ -90,7 +90,7 @@ describe("add todo reducer 2", () => {
 
     it("shoud add todo item after previous", () => {
         var oldState = List<ITodo>([
-            {
+            { 
                 title: "task 1"
             },
             {
