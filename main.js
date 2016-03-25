@@ -20,13 +20,16 @@ var Actions = {
     NULL: "NULL",
     ADD_TODO: "ADD_TODO"
 };
+var defaultTodo = {
+    title: ""
+};
 var Todo = (function (_super) {
     __extends(Todo, _super);
     function Todo(props) {
         _super.call(this, props);
     }
     return Todo;
-}(Record({})));
+}(Record(defaultTodo)));
 var emptyTodoList = Immutable.List([]);
 var addTodoReducer = function (state, action) {
     if (state === void 0) { state = emptyTodoList; }
@@ -46,6 +49,12 @@ var addTodo = function (title) {
     };
 };
 //tests
+describe("Todo", function () {
+    it("test todo", function () {
+        var todo = new Todo({ title: "XXX" });
+        expect(todo.title).to.be.equal("XXX");
+    });
+});
 describe("add todo reducer 2", function () {
     it("shoud use empty list on initial", function () {
         var result = addTodoReducer(undefined, { type: Actions.NULL, title: 'hmm...' });

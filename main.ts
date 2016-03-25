@@ -24,7 +24,11 @@ interface ITodo {
     title: string;
 }
 
-class Todo extends Record({}) implements ITodo {
+const defaultTodo:ITodo = {
+    title: ""
+};
+
+class Todo extends Record(defaultTodo) implements ITodo {
     title:string;
 
     constructor(props:ITodo) {
@@ -61,6 +65,13 @@ const addTodo = (title:string):IAddTodoData => {
 };
 
 //tests
+describe("Todo", () => {
+    it("test todo", () => {
+       var todo = new Todo({title: "XXX"});
+        expect(todo.title).to.be.equal("XXX");
+    });
+});
+
 describe("add todo reducer 2", () => {
     it("shoud use empty list on initial", () => {
         var result = addTodoReducer(undefined, {type: Actions.NULL, title: 'hmm...'});
@@ -90,7 +101,7 @@ describe("add todo reducer 2", () => {
 
     it("shoud add todo item after previous", () => {
         var oldState = List<ITodo>([
-            { 
+            {
                 title: "task 1"
             },
             {
